@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to fetch blog posts
 async function fetchBlogPosts() {
   try {
-    const response = await fetch("blog-data.json");
+    const response = await fetch("data.json");
     const data = await response.json();
 
     if (data.featuredPosts) {
