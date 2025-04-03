@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Blog</title>
+    <meta name="description" content="A responsive blog homepage" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="brand">
+          <h1>My Blog</h1>
+        </div>
+        <div class="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h2>Welcome to My Blog</h2>
+          <p>A place to find interesting articles and ideas</p>
+        </div>
+      </section>
+
+      <section class="featured-posts">
+        <h2>Featured Posts</h2>
+        <div class="posts-grid" id="featured-posts-container">
+          <!-- Posts will be loaded from JSON here -->
+        </div>
+      </section>
+
+      <section class="recent-posts">
+        <h2>Recent Posts</h2>
+        <div class="posts-grid" id="recent-posts-container">
+          <!-- Posts will be loaded from JSON here -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section about">
+          <h3>About My Blog</h3>
+          <p>
+            A platform sharing thoughts, ideas, and stories about various topics
+            of interest.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-section links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-envelope"></i> contact@myblog.com</p>
+          <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 My Blog. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

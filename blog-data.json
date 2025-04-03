@@ -1,0 +1,96 @@
+{
+  "featuredPosts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Web Development in 2023",
+      "excerpt": "Learn the essential skills and tools you need to become a successful web developer this year.",
+      "category": "Web Development",
+      "image": "https://picsum.photos/400/600",
+      "author": "John Smith",
+      "date": "May 15, 2023",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 2,
+      "title": "The Ultimate Guide to Responsive Design",
+      "excerpt": "Explore techniques and best practices for creating websites that look great on any device.",
+      "category": "Design",
+      "image": "https://picsum.photos/400/600",
+      "author": "Sarah Johnson",
+      "date": "June 2, 2023",
+      "readTime": "8 min read"
+    },
+    {
+      "id": 3,
+      "title": "Mastering CSS Grid Layout",
+      "excerpt": "Take your CSS layout skills to the next level with this comprehensive guide to CSS Grid.",
+      "category": "CSS",
+      "image": "https://picsum.photos/400/600",
+      "author": "Alex Williams",
+      "date": "June 10, 2023",
+      "readTime": "6 min read"
+    }
+  ],
+  "recentPosts": [
+    {
+      "id": 4,
+      "title": "JavaScript ES6 Features Every Developer Should Know",
+      "excerpt": "Discover the most useful ES6 features that will help you write cleaner and more efficient JavaScript code.",
+      "category": "JavaScript",
+      "image": "https://picsum.photos/400/600",
+      "author": "David Lee",
+      "date": "June 15, 2023",
+      "readTime": "7 min read"
+    },
+    {
+      "id": 5,
+      "title": "Introduction to Accessibility in Web Design",
+      "excerpt": "Learn why accessibility matters and how to make your websites more inclusive for all users.",
+      "category": "Accessibility",
+      "image": "https://picsum.photos/400/600",
+      "author": "Emma Davis",
+      "date": "June 18, 2023",
+      "readTime": "4 min read"
+    },
+    {
+      "id": 6,
+      "title": "Build a REST API with Node.js and Express",
+      "excerpt": "A step-by-step guide to creating your own RESTful API using Node.js and Express.",
+      "category": "Backend",
+      "image": "https://picsum.photos/400/600",
+      "author": "Michael Brown",
+      "date": "June 20, 2023",
+      "readTime": "10 min read"
+    },
+    {
+      "id": 7,
+      "title": "Understanding CSS Flexbox Layout",
+      "excerpt": "A comprehensive tutorial on using CSS Flexbox to create flexible and responsive layouts.",
+      "category": "CSS",
+      "image": "https://picsum.photos/400/600",
+      "author": "Jessica Wilson",
+      "date": "June 22, 2023",
+      "readTime": "6 min read"
+    },
+    {
+      "id": 8,
+      "title": "The Power of SVG in Modern Web Design",
+      "excerpt": "Explore how Scalable Vector Graphics can enhance your web projects with crisp, responsive images.",
+      "category": "Design",
+      "image": "https://picsum.photos/400/600",
+      "author": "Ryan Taylor",
+      "date": "June 25, 2023",
+      "readTime": "5 min read"
+    },
+    {
+      "id": 9,
+      "title": "Web Performance Optimization Techniques",
+      "excerpt": "Learn how to make your websites load faster and provide a better user experience.",
+      "category": "Performance",
+      "image": "https://picsum.photos/400/600",
+      "author": "Laura Garcia",
+      "date": "June 28, 2023",
+      "readTime": "8 min read"
+    }
+  ]
+}
