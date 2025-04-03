@@ -6,11 +6,11 @@ async function getHeroContent() {
   } catch (error) {}
 }
 
-function updateHeroContent(post) {
+function updateHeroContent(hero) {
   const heroTitle = document.getElementById("hero-title");
   const heroDescription = document.getElementById("hero-description");
-  heroTitle.textContent = post.title;
-  heroDescription.textContent = post.description;
+  heroTitle.textContent = hero.title;
+  heroDescription.textContent = hero.description;
 }
 
-getPosts();
+getHeroContent();
