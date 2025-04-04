@@ -1,8 +1,13 @@
 async function getHeroContent() {
   try {
-    const response = await fetch("data.json");
+    const hasInfo = localStorage.getItem("heroInfo");
+    if (hasInfo) {
+      updateHeroContent(JSON.parse(hasInfo));
+      return null;
+    }
+    const response = await fetch("hero.json");
     const data = await response.json();
-    updateHeroContent(data.hero);
+    localStorage.setItem("heroInfo", JSON.stringify(data));
   } catch (error) {}
 }
 

@@ -1,7 +1,7 @@
 {
-  "hero": {
-    "title": "Welcome to My Blog",
-    "description": "A place to find interesting articles and ideas"
+  "test": {
+    "id": 1,
+    "name": "john"
   },
   "featuredPosts": [
     {
