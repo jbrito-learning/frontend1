@@ -36,6 +36,9 @@ async function fetchBlogPosts() {
     if (data.recentPosts) {
       renderPosts(data.recentPosts, "recent-posts-container");
     }
+
+    // Display favorite posts
+    displayFavoritePosts(data);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
 
@@ -71,7 +74,68 @@ async function fetchBlogPosts() {
 
     renderPosts(fallbackData.featuredPosts, "featured-posts-container");
     renderPosts(fallbackData.recentPosts, "recent-posts-container");
+    displayFavoritePosts(fallbackData);
   }
+}
+
+// Function to display favorite posts
+function displayFavoritePosts(data) {
+  const favorites = getFavorites();
+  const favoriteSection = document.getElementById("favorite-posts-section");
+
+  if (favorites.length === 0) {
+    favoriteSection.style.display = "none";
+    return;
+  }
+
+  favoriteSection.style.display = "block";
+
+  // Combine all posts to filter by favorites
+  const allPosts = [...data.featuredPosts, ...data.recentPosts];
+  const favoritePosts = allPosts.filter((post) => favorites.includes(post.id));
+
+  renderPosts(favoritePosts, "favorite-posts-container");
+}
+
+// Get favorites from localStorage
+function getFavorites() {
+  const favorites = localStorage.getItem("favorites");
+  return favorites ? JSON.parse(favorites) : [];
+}
+
+// Save favorites to localStorage
+function saveFavorites(favorites) {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+// Function to toggle favorite status of a post
+function toggleFavorite(postId) {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(postId);
+
+  if (index === -1) {
+    favorites.push(postId);
+  } else {
+    favorites.splice(index, 1);
+  }
+
+  saveFavorites(favorites);
+
+  // Update UI for all instances of this post
+  document
+    .querySelectorAll(`.favorite-btn[data-id="${postId}"]`)
+    .forEach((btn) => {
+      btn.classList.toggle("active");
+    });
+
+  // Refresh favorite posts section
+  fetchBlogPosts();
+}
+
+// Function to check if a post is favorited
+function isFavorite(postId) {
+  const favorites = getFavorites();
+  return favorites.includes(postId);
 }
 
 // Function to render posts to the DOM
@@ -82,10 +146,16 @@ function renderPosts(posts, containerId) {
   let postsHTML = "";
 
   posts.forEach((post) => {
+    const isFav = isFavorite(post.id);
     postsHTML += `
       <article class="post-card">
         <div class="post-image">
           <img src="${post.image}" alt="${post.title}">
+          <button class="favorite-btn ${isFav ? "active" : ""}" data-id="${
+      post.id
+    }">
+            <i class="fas fa-star"></i>
+          </button>
         </div>
         <div class="post-content">
           <span class="post-category">${post.category}</span>
@@ -101,6 +171,15 @@ function renderPosts(posts, containerId) {
   });
 
   container.innerHTML = postsHTML;
+
+  // Add event listeners to favorite buttons
+  container.querySelectorAll(".favorite-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const postId = parseInt(this.getAttribute("data-id"));
+      toggleFavorite(postId);
+    });
+  });
 }
 
 // Function to filter posts by category (for future use)

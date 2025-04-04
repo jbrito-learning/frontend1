@@ -146,6 +146,7 @@ section h2::after {
 }
 
 .post-image {
+  position: relative;
   height: 200px;
   overflow: hidden;
 }
@@ -191,6 +192,39 @@ section h2::after {
   justify-content: space-between;
   color: #888;
   font-size: 0.85rem;
+}
+
+/* Favorite Button Styles */
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.favorite-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.favorite-btn i {
+  font-size: 1.2rem;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.favorite-btn.active i {
+  color: #ffd700;
 }
 
 /* Footer */
@@ -318,4 +352,22 @@ footer {
   .hero {
     height: 40vh;
   }
+}
+
+/* Favorite Posts Section */
+.favorite-posts {
+  background-color: #f0f8ff;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+.favorite-posts h2 {
+  color: #4361ee;
+}
+
+.favorite-posts h2::after {
+  background: #ffd700;
+  width: 70px;
 }
