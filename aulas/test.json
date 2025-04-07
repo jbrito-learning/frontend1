@@ -1,0 +1,105 @@
+{
+  "user": {
+    "id": 1,
+    "name": "John",
+    "email": "john@example.com",
+    "posts": [
+      {
+        "id": 1,
+        "title": "Noticia random",
+        "conteudo": "Papa dormiu bem esta noite",
+        "datePublish": "5/04/2025",
+        "gallery": [
+          {
+            "id": 1,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 2,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 3,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 4,
+            "url": "https://placehold.co/600x400"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Noticia random",
+        "conteudo": "Papa dormiu bem esta noite",
+        "datePublish": "5/04/2025",
+        "gallery": [
+          {
+            "id": 1,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 2,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 3,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 4,
+            "url": "https://placehold.co/600x400"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Noticia random",
+        "conteudo": "Papa dormiu bem esta noite",
+        "datePublish": "5/04/2025",
+        "gallery": [
+          {
+            "id": 1,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 2,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 3,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 4,
+            "url": "https://placehold.co/600x400"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Noticia random",
+        "conteudo": "Papa dormiu bem esta noite",
+        "datePublish": "5/04/2025",
+        "gallery": [
+          {
+            "id": 1,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 2,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 3,
+            "url": "https://placehold.co/600x400"
+          },
+          {
+            "id": 4,
+            "url": "https://placehold.co/600x400"
+          }
+        ]
+      }
+    ]
+  }
+}
