@@ -371,3 +371,11 @@ footer {
   background: #ffd700;
   width: 70px;
 }
+
+.read-more {
+  background-color: #4361ee;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin: 0 auto;
+}

@@ -1,24 +1,25 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Mobile Menu Toggle
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
-
-  if (menuToggle) {
-    menuToggle.addEventListener("click", function () {
-      navLinks.classList.toggle("active");
-    });
-  }
-
-  // Close the menu when clicking outside
-  document.addEventListener("click", function (event) {
-    if (
-      !event.target.closest(".navbar") &&
-      navLinks.classList.contains("active")
-    ) {
-      navLinks.classList.remove("active");
+async function getHeroContent() {
+  try {
+    const hasInfo = localStorage.getItem("heroInfo");
+    if (hasInfo) {
+      updateHeroContent(JSON.parse(hasInfo));
+      return null;
     }
-  });
+    const response = await fetch("api/hero.json");
+    const data = await response.json();
+    localStorage.setItem("heroInfo", JSON.stringify(data));
+  } catch (error) {}
+}
 
+function updateHeroContent(hero) {
+  const heroTitle = document.getElementById("hero-title");
+  const heroDescription = document.getElementById("hero-description");
+  heroTitle.textContent = hero.title;
+  heroDescription.textContent = hero.description;
+}
+
+getHeroContent();
+document.addEventListener("DOMContentLoaded", function () {
   // Load blog posts from JSON
   fetchBlogPosts();
 });
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Function to fetch blog posts
 async function fetchBlogPosts() {
   try {
-    const response = await fetch("data.json");
+    const response = await fetch("api/data.json");
     const data = await response.json();
 
     if (data.featuredPosts) {

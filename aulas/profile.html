@@ -22,9 +22,9 @@
           <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-links">
-          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="/">Blog</a></li>
-          <li><a href="/aulas/profile.html">Profile</a></li>
+          <li><a href="/aulas/profile.html" class="active">Profile</a></li>
         </ul>
       </nav>
     </header>
@@ -38,27 +38,17 @@
       </section>
 
       <section class="featured-posts">
-        <h2>Featured Posts</h2>
-        <div class="posts-grid" id="featured-posts-container">
+        <h2>Posts</h2>
+        <div
+          class="posts-grid"
+          id="posts-container"
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+          "
+        >
           <!-- Posts will be loaded from JSON here -->
-        </div>
-      </section>
-
-      <section class="recent-posts">
-        <h2>Recent Posts</h2>
-        <div class="posts-grid" id="recent-posts-container">
-          <!-- Posts will be loaded from JSON here -->
-        </div>
-      </section>
-
-      <section
-        class="favorite-posts"
-        id="favorite-posts-section"
-        style="display: none"
-      >
-        <h2>My Favorites</h2>
-        <div class="posts-grid" id="favorite-posts-container">
-          <!-- Favorite posts will be loaded here -->
         </div>
       </section>
     </main>
@@ -96,6 +86,6 @@
         <p>&copy; 2025 My Blog. All rights reserved.</p>
       </div>
     </footer>
-    <script src="scripts/main.js" defer></script>
+    <script src="scripts/profile.js" defer></script>
   </body>
 </html>
