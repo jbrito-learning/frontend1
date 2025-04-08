@@ -1,9 +1,14 @@
-import { getPosts } from "../lib/api.js";
+import { getPosts, createPost } from "../lib/api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await getPosts();
+  displayPosts(posts);
+  setupModal();
+});
 
+function displayPosts(posts) {
   const postList = document.getElementById("post-list");
+
   posts.forEach((post) => {
     const postItem = document.createElement("div");
     postItem.classList.add("post-item");
@@ -29,4 +34,55 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
     postList.appendChild(postItem);
   });
-});
+}
+
+function setupModal() {
+  const modal = document.getElementById("add-post-modal");
+  const openModalBtn = document.getElementById("open-modal-btn");
+  const closeModal = document.querySelector(".close-modal");
+  const addPostForm = document.getElementById("add-post-form");
+
+  // Open modal
+  openModalBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+
+  // Close modal
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+    addPostForm.reset();
+  });
+
+  // Close when clicking outside
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      addPostForm.reset();
+    }
+  });
+
+  // Handle form submission
+  addPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const newPost = {
+      title: document.getElementById("post-title").value,
+      content: document.getElementById("post-content").value,
+      image: document.getElementById("post-image").value,
+      author: document.getElementById("post-author").value,
+      avatar: document.getElementById("post-avatar").value,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      await createPost(newPost);
+      const updatedPosts = await getPosts();
+      displayPosts(updatedPosts);
+      modal.style.display = "none";
+      addPostForm.reset();
+    } catch (error) {
+      console.error("Error adding post:", error);
+      alert("Failed to add post. Please try again.");
+    }
+  });
+}
