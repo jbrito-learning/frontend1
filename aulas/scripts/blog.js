@@ -1,4 +1,4 @@
-import { getPosts, createPost } from "../lib/api.js";
+import { getPosts, createPost, updatePost, deletePost } from "../lib/api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const posts = await getPosts();
@@ -8,11 +8,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function displayPosts(posts) {
   const postList = document.getElementById("post-list");
+  postList.innerHTML = "";
 
   posts.forEach((post) => {
     const postItem = document.createElement("div");
     postItem.classList.add("post-item");
     postItem.innerHTML = `
+        <div class="post-actions">
+            <button class="edit-post-btn" data-id="${
+              post.id
+            }"><i class="fas fa-edit"></i></button>
+            <button class="delete-post-btn" data-id="${
+              post.id
+            }"><i class="fas fa-trash"></i></button>
+        </div>
         <img class="post-image" src="${post.image}" alt="${post.title}">
         <h3 class="post-title">${post.title}</h3>
         <p class="post-content">${post.content}</p>
@@ -34,6 +43,76 @@ function displayPosts(posts) {
     `;
     postList.appendChild(postItem);
   });
+
+  // Add event listeners for edit and delete buttons
+  setupPostActions();
+}
+
+function setupPostActions() {
+  // Setup edit buttons
+  document.querySelectorAll(".edit-post-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const postId = e.currentTarget.dataset.id;
+      openEditModal(postId);
+    });
+  });
+
+  // Setup delete buttons
+  document.querySelectorAll(".delete-post-btn").forEach((button) => {
+    button.addEventListener("click", async (e) => {
+      const postId = e.currentTarget.dataset.id;
+
+      if (confirm("Are you sure you want to delete this post?")) {
+        try {
+          await deletePost(postId);
+          const updatedPosts = await getPosts();
+          displayPosts(updatedPosts);
+        } catch (error) {
+          console.error("Error deleting post:", error);
+          alert("Failed to delete post. Please try again.");
+        }
+      }
+    });
+  });
+}
+
+async function openEditModal(postId) {
+  try {
+    const modal = document.getElementById("add-post-modal");
+    const modalTitle = modal.querySelector("h2");
+    const form = document.getElementById("add-post-form");
+    const submitButton = form.querySelector(".submit-button");
+
+    // Change the modal title and button text
+    modalTitle.textContent = "Edit Post";
+    submitButton.textContent = "Update Post";
+
+    // Get the post data
+    const posts = await getPosts();
+    const post = posts.find((p) => p.id === postId);
+
+    if (!post) {
+      alert("Post not found!");
+      return;
+    }
+
+    // Fill the form with the post data
+    document.getElementById("post-title").value = post.title;
+    document.getElementById("post-content").value = post.content;
+    document.getElementById("post-image").value = post.image;
+    document.getElementById("post-author").value = post.author;
+    document.getElementById("post-avatar").value = post.avatar;
+
+    // Add a data attribute to the form to mark it as edit mode
+    form.dataset.mode = "edit";
+    form.dataset.postId = postId;
+
+    // Show the modal
+    modal.style.display = "flex";
+  } catch (error) {
+    console.error("Error opening edit modal:", error);
+    alert("Failed to load post data. Please try again.");
+  }
 }
 
 function setupModal() {
@@ -42,8 +121,21 @@ function setupModal() {
   const closeModal = document.querySelector(".close-modal");
   const addPostForm = document.getElementById("add-post-form");
 
-  // Open modal
+  // Open modal for new post
   openModalBtn.addEventListener("click", () => {
+    const modalTitle = modal.querySelector("h2");
+    const submitButton = addPostForm.querySelector(".submit-button");
+
+    // Reset to add mode
+    modalTitle.textContent = "Add New Post";
+    submitButton.textContent = "Add Post";
+    addPostForm.dataset.mode = "add";
+    delete addPostForm.dataset.postId;
+
+    // Reset form
+    addPostForm.reset();
+
+    // Show modal
     modal.style.display = "flex";
   });
 
@@ -61,28 +153,37 @@ function setupModal() {
     }
   });
 
-  // Handle form submission
+  // Handle form submission (create or update)
   addPostForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const newPost = {
+    const postData = {
       title: document.getElementById("post-title").value,
       content: document.getElementById("post-content").value,
       image: document.getElementById("post-image").value,
       author: document.getElementById("post-author").value,
       avatar: document.getElementById("post-avatar").value,
-      createdAt: new Date().toISOString(),
     };
 
     try {
-      await createPost(newPost);
+      // Check if we're in edit mode
+      if (addPostForm.dataset.mode === "edit") {
+        const postId = addPostForm.dataset.postId;
+        await updatePost(postId, postData);
+      } else {
+        // We're in add mode
+        postData.createdAt = new Date().toISOString();
+        await createPost(postData);
+      }
+
+      // Refresh the post list and reset the form
       const updatedPosts = await getPosts();
       displayPosts(updatedPosts);
       modal.style.display = "none";
       addPostForm.reset();
     } catch (error) {
-      console.error("Error adding post:", error);
-      alert("Failed to add post. Please try again.");
+      console.error("Error saving post:", error);
+      alert("Failed to save post. Please try again.");
     }
   });
 }
