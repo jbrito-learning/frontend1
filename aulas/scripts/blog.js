@@ -1,10 +1,49 @@
 import { getPosts, createPost, updatePost, deletePost } from "../lib/api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const posts = await getPosts();
-  displayPosts(posts);
+  // Show loading indicator
+  showLoading();
+
+  try {
+    const posts = await getPosts();
+    displayPosts(posts);
+  } catch (error) {
+    console.error("Error loading posts:", error);
+    showError("Failed to load posts. Please try again later.");
+  } finally {
+    // Hide loading indicator
+    hideLoading();
+  }
+
   setupModal();
 });
+
+function showLoading() {
+  const postList = document.getElementById("post-list");
+  postList.innerHTML = `
+    <div class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Loading posts...</p>
+    </div>
+  `;
+}
+
+function hideLoading() {
+  const loadingIndicator = document.querySelector(".loading-indicator");
+  if (loadingIndicator) {
+    loadingIndicator.remove();
+  }
+}
+
+function showError(message) {
+  const postList = document.getElementById("post-list");
+  postList.innerHTML = `
+    <div class="error-message">
+      <i class="fas fa-exclamation-circle"></i>
+      <p>${message}</p>
+    </div>
+  `;
+}
 
 function displayPosts(posts) {
   const postList = document.getElementById("post-list");
@@ -64,12 +103,15 @@ function setupPostActions() {
 
       if (confirm("Are you sure you want to delete this post?")) {
         try {
+          showLoading();
           await deletePost(postId);
           const updatedPosts = await getPosts();
           displayPosts(updatedPosts);
         } catch (error) {
           console.error("Error deleting post:", error);
-          alert("Failed to delete post. Please try again.");
+          showError("Failed to delete post. Please try again.");
+        } finally {
+          hideLoading();
         }
       }
     });
@@ -166,6 +208,9 @@ function setupModal() {
     };
 
     try {
+      modal.style.display = "none";
+      showLoading();
+
       // Check if we're in edit mode
       if (addPostForm.dataset.mode === "edit") {
         const postId = addPostForm.dataset.postId;
@@ -179,11 +224,12 @@ function setupModal() {
       // Refresh the post list and reset the form
       const updatedPosts = await getPosts();
       displayPosts(updatedPosts);
-      modal.style.display = "none";
       addPostForm.reset();
     } catch (error) {
       console.error("Error saving post:", error);
-      alert("Failed to save post. Please try again.");
+      showError("Failed to save post. Please try again.");
+    } finally {
+      hideLoading();
     }
   });
 }
