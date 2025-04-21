@@ -1,10 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   fetchProfile();
+  fetchLocation();
 });
 
 window.addEventListener("storage", function () {
   fetchProfile();
 });
+
+function fetchLocation() {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const coords = document.getElementById("coords");
+    coords.innerHTML = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+  });
+}
+const copyToClipboard = () => {
+  const textToCopy = document.getElementById("text-to-copy");
+  navigator.clipboard.writeText(textToCopy.value);
+};
 
 function fetchProfile() {
   const profile = localStorage.getItem("profile");
@@ -29,6 +41,11 @@ function renderProfile(data) {
   email.innerHTML = data.email;
 }
 
+function openFullScreen(id) {
+  const post = document.getElementById(`post-card-${id}`);
+  post.requestFullscreen();
+}
+
 function renderPosts(data) {
   const posts = document.getElementById("posts-container");
   posts.innerHTML = data
@@ -38,7 +55,7 @@ function renderPosts(data) {
         post.title,
         secretKey
       ).toString(CryptoJS.enc.Utf8);
-      return `<div class="post-card">
+      return `<div class="post-card" id="post-card-${post.id}">
       <div class="post-image">
         <img src="${post.gallery[0].url}" alt="${post.title}">
       </div>
@@ -47,6 +64,7 @@ function renderPosts(data) {
         <p>${post.content}</p>
       </div>
       <a class="read-more" href="/aulas/post.html?id=${post.id}">Read More</a>
+      <button onclick="openFullScreen('${post.id}')">Open Full Screen</button>
       </div>`;
     })
     .join("");
