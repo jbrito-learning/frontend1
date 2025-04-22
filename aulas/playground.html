@@ -10,12 +10,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
-      integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
     <script src="scripts/script.js" defer></script>
   </head>
   <body>
@@ -30,8 +24,10 @@
         <ul class="nav-links">
           <li><a href="/aulas">Home</a></li>
           <li><a href="/aulas/blog.html">Blog</a></li>
-          <li><a href="/aulas/profile.html" class="active">Profile</a></li>
-          <li><a href="/aulas/playground.html">Playground</a></li>
+          <li><a href="/aulas/profile.html">Profile</a></li>
+          <li>
+            <a href="/aulas/playground.html" class="active">Playground</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -39,42 +35,19 @@
     <main>
       <section class="hero">
         <div class="hero-content">
-          <h2 id="hero-title"></h2>
-          <p id="hero-description"></p>
+          <h2 id="hero-title">Playground</h2>
+          <p id="hero-description">
+            This is the playground for the blog. Here you can test the blog and
+            see the results.
+          </p>
         </div>
       </section>
       <section>
-        <h2>Location</h2>
-        <div class="coords" id="coords"></div>
-      </section>
-
-      <section>
-        <h2>Copy To Clipboard</h2>
-        <input type="text" id="text-to-copy" />
-        <button
-          onclick="copyToClipboard()"
-          style="cursor: pointer"
-          id="copy-to-clipboard"
-        >
-          Copy to Clipboard
-        </button>
-      </section>
-
-      <section class="featured-posts">
-        <div class="posts-header">
-          <a href="/aulas/add-post.html" class="add-post-btn">Add Post</a>
-        </div>
-        <h2>Posts</h2>
-        <div
-          class="posts-grid"
-          id="posts-container"
-          style="
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-          "
-        >
-          <!-- Posts will be loaded from JSON here -->
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <h2>Canvas</h2>
+          <canvas id="test-canvas" width="500" height="500"></canvas>
+          <canvas id="animate-canvas" width="500" height="500"></canvas>
+          <canvas id="game-canvas" width="500" height="500"></canvas>
         </div>
       </section>
     </main>
@@ -113,6 +86,6 @@
         <p>&copy; 2025 My Blog. All rights reserved.</p>
       </div>
     </footer>
-    <script src="scripts/profile.js" defer></script>
+    <script src="scripts/playground.js" defer></script>
   </body>
 </html>
