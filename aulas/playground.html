@@ -11,6 +11,56 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <script src="scripts/script.js" defer></script>
+    <style>
+      /* Tab system styles */
+      .tabs-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .tabs-nav {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .tabs-nav li {
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-right: 5px;
+        background-color: #f1f1f1;
+        border: 1px solid #ddd;
+        border-bottom: none;
+        border-radius: 5px 5px 0 0;
+      }
+
+      .tabs-nav li.active {
+        background-color: #4361ee;
+        color: white;
+        border-color: #4361ee;
+      }
+
+      .tab-content {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 0 0 5px 5px;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .canvas-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -42,15 +92,56 @@
           </p>
         </div>
       </section>
+
       <section>
-        <div style="display: flex; flex-direction: column; align-items: center">
-          <h2>Canvas</h2>
-          <canvas id="test-canvas" width="500" height="500"></canvas>
-          <canvas id="animate-canvas" width="500" height="500"></canvas>
-          <canvas id="game-canvas" width="500" height="500"></canvas>
+        <div class="tabs-container">
+          <ul class="tabs-nav">
+            <li class="active" data-tab="canvas-api">Canvas API</li>
+            <li data-tab="web-components">Web Components</li>
+          </ul>
+
+          <div id="canvas-api" class="tab-content active">
+            <h2>Canvas API Examples</h2>
+            <div class="canvas-container">
+              <div>
+                <h3>Basic Shapes</h3>
+                <canvas id="test-canvas" width="500" height="500"></canvas>
+              </div>
+              <div>
+                <h3>Animation</h3>
+                <canvas id="animate-canvas" width="500" height="500"></canvas>
+              </div>
+              <div>
+                <h3>Interactive Game (Use Arrow Keys)</h3>
+                <canvas id="game-canvas" width="500" height="500"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div id="web-components" class="tab-content">
+            <h2>Web Components API</h2>
+            <!-- <test-web-component></test-web-component> -->
+            <!-- <navbar-web-component></navbar-web-component> -->
+            <!-- <shadow-button button-text="Click me"></shadow-button> -->
+            <!-- <my-paragraph>
+              <span slot="my-text">My default text 2</span>
+            </my-paragraph> -->
+          </div>
         </div>
       </section>
     </main>
+    <template id="custom-paragraph">
+      <style>
+        p {
+          color: white;
+          background-color: #666;
+          padding: 5px;
+        }
+      </style>
+      <slot name="my-text">
+        <p>My default text</p>
+      </slot>
+    </template>
 
     <footer>
       <div class="footer-content">
@@ -86,6 +177,30 @@
         <p>&copy; 2025 My Blog. All rights reserved.</p>
       </div>
     </footer>
-    <script src="scripts/playground.js" defer></script>
+    <script src="scripts/playground/playground.js" defer></script>
+    <script src="scripts/playground/canvas.js" defer></script>
+    <script src="scripts/playground/web-components.js" defer></script>
+    <script>
+      // Tab system functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabLinks = document.querySelectorAll(".tabs-nav li");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabLinks.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            // Remove active class from all tabs
+            tabLinks.forEach((t) => t.classList.remove("active"));
+            tabContents.forEach((c) => c.classList.remove("active"));
+
+            // Add active class to clicked tab
+            tab.classList.add("active");
+
+            // Show corresponding content
+            const tabId = tab.getAttribute("data-tab");
+            document.getElementById(tabId).classList.add("active");
+          });
+        });
+      });
+    </script>
   </body>
 </html>
