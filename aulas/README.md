@@ -17,7 +17,8 @@
 7. Desenhar 2 formas básicas no canvas api [Reference](https://docs.google.com/presentation/d/16kchou9WWyFQUxsQ6YmfFqjlAc1HmMlo/edit?slide=id.g34e23982766_0_58#slide=id.g34e23982766_0_58)
 8. Implementar um component de web components [Reference](https://docs.google.com/presentation/d/16kchou9WWyFQUxsQ6YmfFqjlAc1HmMlo/edit?slide=id.g34e23982766_0_129#slide=id.g34e23982766_0_129)
 9. Utilizar uma biblioteca externa, por exemplo, caroussel [Reference](https://docs.google.com/presentation/d/16kchou9WWyFQUxsQ6YmfFqjlAc1HmMlo/edit?slide=id.g34ff373a90f_0_47#slide=id.g34ff373a90f_0_47)
-10. Gerar report do Lighthouse e colocar screenshot no repositório do projeto [Reference](https://docs.google.com/presentation/d/16kchou9WWyFQUxsQ6YmfFqjlAc1HmMlo/edit?slide=id.g304f4088e01_1_85#slide=id.g304f4088e01_1_85)
+10. Gerar report do Lighthouse e colocar screenshot no repositório do projeto. Ter pelo menos 90 de score em 2 das 4 métricas [Reference](https://docs.google.com/presentation/d/16kchou9WWyFQUxsQ6YmfFqjlAc1HmMlo/edit?slide=id.g304f4088e01_1_85#slide=id.g304f4088e01_1_85)
+11. Pelo menos 1 exemplo de cada CRUD operation
 
 ## Bonus
 
