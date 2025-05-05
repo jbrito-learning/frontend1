@@ -6,15 +6,20 @@
 
 <br>
 
+### **Repositorio:** /frontend1-project-todoodledoo
+
+<br>
+
 # Requisitos
 
-1. Create, Read, Update and Remove operations (Create todo item, read all todo items, update single todo item, remove single todo item).
+1. Create, Read, Update and Delete operations (Create todo item, read all todo items, update single todo item, Delete single todo item).
 2. Use mock api.
 3. Use at least one native javascript API (Geolocation, DateTime, etc).
 4. Form to create and edit todo items, with validation.
 5. Use at least one external library (An ui component library for example).
-6. Generate lighthouse report with all 4 metrics on the green.
-7. Online on github pages.
+6. Responsive
+7. Generate lighthouse report with all 4 metrics on the green.
+8. Online on github pages.
 
 ## Bonus
 
